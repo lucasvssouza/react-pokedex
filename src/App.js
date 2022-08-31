@@ -11,6 +11,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState(false);
   const [pokemons, setPokemons] = useState([]);
+  const [backPage, setbackPage] = useState(false);
   const [page, setPage] = useState(1);
   const [cPage, setcPage] = useState(1);
 
@@ -28,6 +29,11 @@ function App() {
     } else {
       setcPage(cPage - 1);
     }
+  };
+
+  const returnPage = async () => {
+    fetchPokemons();
+    setbackPage(false);
   };
 
   const getNumber = async () => {
@@ -60,14 +66,24 @@ function App() {
   };
 
   const onSearchHandler = async (pokemon) => {
-    try {
-      setSearch(true);
-      const results = await searchPokemon(pokemon.toLowerCase());
-      setPokemons(results);
-      setSearch(false);
-      console.log(results);
-    } catch (err) {
-      console.log("Error: " + err);
+    console.log(pokemon);
+    if (pokemon === "") {
+    } else {
+      try {
+        setSearch(true);
+        setbackPage(true);
+        const results = await searchPokemon(pokemon.toLowerCase());
+        if (results !== undefined) {
+          setPokemons([results]);
+          setSearch(false);
+          console.log(results);
+        } else {
+          setPokemons(undefined);
+          setSearch(false);
+        }
+      } catch (err) {
+        console.log("Error: " + err);
+      }
     }
   };
 
@@ -77,7 +93,7 @@ function App() {
 
   return (
     <div>
-      <body>
+      <div className="app-container">
         <Navbar />
         <main>
           <div className="search-page">
@@ -87,11 +103,13 @@ function App() {
               nextPage={nextPage}
               page={page}
               cpage={cPage}
+              backPage={backPage}
+              returnPage={returnPage}
             />
           </div>
           <PokemonList pokemons={pokemons} loading={loading} search={search} />
         </main>
-      </body>
+      </div>
       <Footer />
     </div>
   );

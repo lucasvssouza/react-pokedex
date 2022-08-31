@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { searchPokemon } from "../api";
+import search from "../image/search_button.png";
 
 const Searchbar = (props) => {
   const { onSearchHandler } = props;
@@ -29,9 +29,9 @@ const Searchbar = (props) => {
         onChange={searchInput}
         onKeyDown={searchKey}
       ></input>
-      <button className="sb-button" onClick={searchButton}>
-        Q
-      </button>
+        <button className="sb-button" onClick={searchButton}>
+          <img src={search} />
+        </button>
       {getPokemon ? (
         <div>
           <div>

@@ -3,25 +3,31 @@
   padding: 0px;
 }
 
-html{
+html {
   height: 100%;
 }
 
-body {
+body{
   background: rgb(1, 4, 78);
   background: linear-gradient(90deg, rgb(2, 7, 156) 0%, rgb(0, 0, 255) 100%);
 }
 
-footer{
+.app-container {
+  display: flex;
+  flex-direction: column;
+
+  min-height: calc(100vh - 72px);
+}
+
+footer {
   background-color: rgb(0, 1, 37);
-  border-top:2px solid red;
-  height: 100px;
+  border-top: 2px solid red;
+
+  height: 50px;
   margin-top: 20px;
-  position: sticky;
 }
 
 .search-page {
-  padding: 0px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -31,7 +37,7 @@ footer{
 
 .navbar {
   background-color: rgb(0, 1, 37);
-  border-bottom:2px solid red;
+  border-bottom: 2px solid red;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
 
@@ -43,7 +49,6 @@ footer{
   align-items: center;
 
   padding: 0px 40px 0px 40px;
-
 }
 
 .navbar h1 {
@@ -74,15 +79,18 @@ footer{
 }
 
 .sb-button {
-  background-color: rgb(0, 1, 37);
   margin-left: 10px;
-  border-radius: 15px;
-  border: none;
+  border-radius: 10px;
+  width: 40px;
+  background-color: rgb(0, 1, 37);
+  height: 40px;
+  color: white;
+  display: flex;
+}
+
+.sb-button img{
   width: 35px;
   height: 35px;
-  padding: 10px 20px;
-  color: white;
-  padding: 0px;
 }
 
 .pagination {
@@ -126,7 +134,6 @@ footer{
   padding: 10px;
 }
 
-
 @media screen and (max-width: 1800px) {
   .pokedex-grid {
     display: grid;
@@ -157,20 +164,22 @@ footer{
   }
 }
 
-
 .pokemon-card {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   background: linear-gradient(
     157deg,
     rgba(180, 58, 58, 1) 50%,
     rgba(58, 80, 180, 1) 50%
   );
+  filter: saturate(180%);
+
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
   border-radius: 20px;
   border: 5px solid black;
-  filter: saturate(180%);
 }
+
 
 .pokemon-img {
   background: rgba(255, 255, 255, 0.25);
@@ -179,16 +188,19 @@ footer{
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
   border: 3px solid rgba(0, 0, 0, 0.5);
+
   width: 80px;
   height: 80px;
   margin: 5px;
-  padding: 3px;
 }
 
 .pokemon-info {
-  align-items: center;
+  display: flex;
   flex-direction: column;
   color: white;
+  flex: 1;
+  padding-right: 10px;
+  padding-left: 5px;
 }
 
 .pokemon-type {
@@ -205,11 +217,11 @@ footer{
 }
 
 .pokemon-id-img {
-  border: none;
-  background-color: transparent;
   width: 20px;
   height: 20px;
+  padding-right: 10px;
 }
+
 .type {
   text-align: center;
   border-radius: 7px;
@@ -220,6 +232,7 @@ footer{
   margin-right: 5px;
 }
 
+/* Type Pokémons */
 .bug {
   background-color: #b97fc9;
   color: white;
@@ -324,7 +337,4 @@ footer{
   background-color: #4592c4;
   color: white;
 }
-
-.App {
-  text-align: center;
-}
+/* Type Pokémons */
