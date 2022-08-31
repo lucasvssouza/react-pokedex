@@ -63,6 +63,8 @@ function App() {
     try {
       setSearch(true);
       const results = await searchPokemon(pokemon.toLowerCase());
+      setPokemons(results);
+      setSearch(false);
       console.log(results);
     } catch (err) {
       console.log("Error: " + err);
@@ -74,16 +76,22 @@ function App() {
   }, [cPage]);
 
   return (
-    <div className="main">
-      <Navbar />
-      <Searchbar onSearchHandler={onSearchHandler} />
-      <PokemonPage
-        previousPage={previousPage}
-        nextPage={nextPage}
-        page={page}
-        cpage={cPage}
-      />
-      <PokemonList pokemons={pokemons} loading={loading} search={search} />
+    <div>
+      <body>
+        <Navbar />
+        <main>
+          <div className="search-page">
+            <Searchbar onSearchHandler={onSearchHandler} />
+            <PokemonPage
+              previousPage={previousPage}
+              nextPage={nextPage}
+              page={page}
+              cpage={cPage}
+            />
+          </div>
+          <PokemonList pokemons={pokemons} loading={loading} search={search} />
+        </main>
+      </body>
       <Footer />
     </div>
   );
