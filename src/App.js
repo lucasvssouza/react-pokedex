@@ -10,17 +10,17 @@ import Footer from "./components/Footer";
 function App() {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState(false);
-  const [pokemons, setPokemons] = useState([]);
+  const [details, setDetails] = useState(false)
+  const [onDelete, setonDelete] = useState(true);
   const [backPage, setbackPage] = useState(false);
   const [page, setPage] = useState(1);
   const [cPage, setcPage] = useState(1);
-  const [onDelete, setonDelete] = useState(true);
+  const [pokemons, setPokemons] = useState([]);
 
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const urlPage = urlParams.get("page");
   const urlPokemon = urlParams.get("pokemon");
-  const urlPokemonDetails = urlParams.get("pokemondetails");
 
   const updateURL = async (key, type, value, variable) => {
     if (type === "pageSafe") {
@@ -58,6 +58,7 @@ function App() {
       cPage;
     window.history.pushState({ path: newurl }, "", newurl);
     setbackPage(false);
+    setDetails(false);
     setonDelete(true);
   };
 
@@ -108,7 +109,6 @@ function App() {
           setLoading(false);
         } else {
           const currentPage = parseInt(urlPage);
-
           if (currentPage >= 1 && currentPage <= 23) {
             setcPage(currentPage);
             setLoading(true);
@@ -140,7 +140,6 @@ function App() {
 
   const onSearchHandler = async (pokemon) => {
     const fillPokemon = pokemon.trim();
-
     if (fillPokemon === "") {
     } else {
       try {
@@ -152,6 +151,8 @@ function App() {
           updateURL("?pokemon=", "pokemonSafe", fillPokemon, "pokemon");
           setPokemons([results]);
           setSearch(false);
+          setDetails(true);
+          console.log(typeof results);
         } else {
           setPokemons(undefined);
           setSearch(false);
@@ -161,6 +162,29 @@ function App() {
       }
     }
   };
+
+  const pokemonDetails = async (pokemon) => {
+    const fillPokemon = pokemon.trim();
+    if (fillPokemon === "") {
+    } else {
+      try {
+        setSearch(true);
+        setbackPage(true);
+        const results = await searchPokemon(fillPokemon.toLowerCase());
+        if (results !== undefined) {
+          updateURL("?pokemon=", "pokemonSafe", fillPokemon, "pokemon");
+          setPokemons([results]);
+          setDetails(true);
+          setSearch(false);
+        } else {
+          setPokemons(undefined);
+          setSearch(false);
+        }
+      } catch (err) {
+        console.log("Error: " + err);
+      }
+    }
+  }
 
   useEffect(() => {
     fetchPokemons();
@@ -189,7 +213,7 @@ function App() {
               search={search}
             />
           </div>
-          <PokemonList pokemons={pokemons} loading={loading} search={search} />
+          <PokemonList pokemons={pokemons} details={details} loading={loading} search={search} pokemonDetails={pokemonDetails} />
         </main>
       </div>
       <Footer />

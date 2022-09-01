@@ -2,19 +2,31 @@ import React from "react";
 import Pokemon from "./Pokemon";
 
 const PokemonList = (props) => {
-  const { search, pokemons, loading } = props;
+  const { search, loading, details, pokemons, pokemonDetails } = props;
 
-  const Render = () => {
+  const RenderList = () => {
     if (pokemons === undefined) {
       return <div className="alert-msg">Pokémon não encontrado!!!</div>;
     } else {
-      return (
-        <div className="pokedex-grid">
-          {pokemons.map((pokemon, index) => {
-            return <Pokemon key={index} pokemon={pokemon} />;
-          })}
-        </div>
-      );
+      if(details === true){
+        console.log('true')
+        return (
+          <div className="pokedex-details" >
+            {pokemons.map((pokemon, index) => {
+              return <Pokemon pokemonDetails={pokemonDetails} details={details} key={index} pokemon={pokemon} />;
+            })}
+          </div>
+        );
+      }if(details === false){
+        return (
+          <div className="pokedex-grid">
+            {pokemons.map((pokemon, index) => {
+              return <Pokemon pokemonDetails={pokemonDetails} details={details} key={index} pokemon={pokemon} />;
+            })}
+          </div>
+        );
+      }
+      
     }
   };
 
@@ -23,7 +35,7 @@ const PokemonList = (props) => {
       {loading || search ? (
         <div className="alert-msg">Carregando aguarde...</div>
       ) : (
-        <Render />
+        <RenderList />
       )}
     </div>
   );

@@ -22,7 +22,6 @@ body {
 footer {
   background-color: rgb(0, 1, 37);
   border-top: 2px solid red;
-
   height: 50px;
   margin-top: 20px;
 }
@@ -40,16 +39,14 @@ footer {
   border-bottom: 2px solid red;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
-
   height: 100px;
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
   padding: 0px 40px 0px 40px;
 }
+
 
 .navbar h1 {
   color: white;
@@ -59,6 +56,17 @@ footer {
 .navbar-logo {
   margin: 10px;
   width: 160px;
+}
+
+@media screen and (max-width: 760px) {
+  .navbar-logo {
+    margin: 10px;
+    width: 120px;
+  }
+  .navbar h1 {
+    color: white;
+    font-size: 30px;
+  }
 }
 
 .sb-container {
@@ -171,29 +179,26 @@ footer {
     rgba(58, 80, 180, 1) 50%
   );
   filter: saturate(180%);
-
   display: flex;
   align-items: center;
   flex-direction: row;
-
   border-radius: 20px;
   border: 5px solid black;
 }
 
-.pokemon-img {
+.pc-img {
   background: rgba(255, 255, 255, 0.25);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
   border: 3px solid rgba(0, 0, 0, 0.5);
-
   width: 80px;
   height: 80px;
   margin: 5px;
 }
 
-.pokemon-info {
+.pc-info {
   display: flex;
   flex-direction: column;
   color: white;
@@ -202,30 +207,137 @@ footer {
   padding-left: 5px;
 }
 
-.pokemon-type {
+.pc-type {
   padding-top: 5px;
+  padding-bottom: 5px;
   display: flex;
   flex-direction: row;
 }
 
-.pokemon-id {
+.pc-id {
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: end;
 }
 
-.pokemon-id-img {
+.pc-id-img {
   width: 20px;
   height: 20px;
   padding-right: 10px;
+}
+
+.pokedex-details {
+  margin-right: 50px;
+  margin-left: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pokemon-details {
+  background: linear-gradient(
+    157deg,
+    rgba(180, 58, 58, 1) 50%,
+    rgba(58, 80, 180, 1) 50%
+  );
+  filter: saturate(180%);
+  border-radius: 20px;
+  border: 5px solid black;  
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.pd-img {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border: 3px solid rgba(0, 0, 0, 0.5);
+  width: 80px;
+  height: 80px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.pd-info {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  flex: 1;
+  padding-right: 10px;
+  padding-left: 5px;
+}
+
+.pd-type {
+  padding-top: 5px;
+  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.pd-ability {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: grid;
+  
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.pd-stats {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.pd-s-item {
+  display: flex;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  align-items: center;
+  flex-direction: row;
+  
+}
+
+.pd-id-img {
+  width: 20px;
+  height: 20px;
+  padding-right: 10px;
+}
+
+.pd-img-height {
+  width: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  height: 20px;
+  padding-right: 10px;
+}
+
+.ability{
+  text-align: center;
+  border-radius: 7px;
+  border: 3px solid rgba(0, 0, 0, 0.5);
+  width: 90px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+
+  background-color: white;background: rgb(255,255,255);
+  background: linear-gradient(270deg, rgba(255,255,255,1) 0%, rgba(162,162,162,1) 100%);  color:black
 }
 
 .type {
   text-align: center;
   border-radius: 7px;
   border: 3px solid rgba(0, 0, 0, 0.5);
-  width: 75px;
+  width: 90px;
   padding-left: 5px;
   padding-right: 5px;
   margin-right: 5px;
