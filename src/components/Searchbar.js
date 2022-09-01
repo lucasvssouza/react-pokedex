@@ -17,9 +17,9 @@ const Searchbar = (props) => {
     }
   };
 
-  function searchButton() {
+  const searchButton = () => {
     onSearchHandler(getSearch);
-  }
+  };
 
   return (
     <div className="sb-container">
@@ -29,9 +29,9 @@ const Searchbar = (props) => {
         onChange={searchInput}
         onKeyDown={searchKey}
       ></input>
-        <button className="sb-button" onClick={searchButton}>
-          <img src={search} />
-        </button>
+      <button className="sb-button" onClick={searchButton}>
+        <img src={search} />
+      </button>
       {getPokemon ? (
         <div>
           <div>

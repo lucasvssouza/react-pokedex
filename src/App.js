@@ -14,12 +14,58 @@ function App() {
   const [backPage, setbackPage] = useState(false);
   const [page, setPage] = useState(1);
   const [cPage, setcPage] = useState(1);
+  const [onDelete, setonDelete] = useState(true);
 
-  const nextPage = async () => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const urlPage = urlParams.get("page");
+  const urlPokemon = urlParams.get("pokemon");
+  const urlPokemonDetails = urlParams.get("pokemondetails");
+
+  const updateURL = async (key, type, value, variable) => {
+    if (type === "pageSafe") {
+      var newurl =
+        window.location.protocol +
+        "//" +
+        window.location.host +
+        window.location.pathname +
+        key +
+        value;
+      window.history.pushState({ path: newurl }, "", newurl);
+      setcPage(key);
+    }
+    if (type === "pokemonSafe") {
+      var newurl =
+        window.location.protocol +
+        "//" +
+        window.location.host +
+        window.location.pathname +
+        key +
+        value +
+        "&page=" +
+        cPage;
+      window.history.pushState({ path: newurl }, "", newurl);
+    }
+  };
+
+  const deleteURL = async () => {
+    var newurl =
+      window.location.protocol +
+      "//" +
+      window.location.host +
+      window.location.pathname +
+      "?page=" +
+      cPage;
+    window.history.pushState({ path: newurl }, "", newurl);
+    setbackPage(false);
+    setonDelete(true);
+  };
+
+  const nextPage = () => {
     if (cPage >= page) {
       setcPage(page);
     } else {
-      setcPage(cPage + 1);
+      updateURL("?page=", "pageSafe", cPage + 1, "page");
     }
   };
 
@@ -27,13 +73,12 @@ function App() {
     if (cPage <= 1) {
       setcPage(1);
     } else {
-      setcPage(cPage - 1);
+      updateURL("?page=", "pageSafe", cPage - 1, "page");
     }
   };
 
   const returnPage = async () => {
-    fetchPokemons();
-    setbackPage(false);
+    deleteURL();
   };
 
   const getNumber = async () => {
@@ -51,32 +96,62 @@ function App() {
 
   const fetchPokemons = async (page) => {
     try {
-      setLoading(true);
-      const data = await pokemonList((cPage - 1) * 51);
-      const promises = data.results.map(async (pokemon) => {
-        return await getPokedex(pokemon.url);
-      });
-      const results = await Promise.all(promises);
-      setPokemons(results);
-      setLoading(false);
-      console.log(results);
+      if (urlPokemon === null) {
+        if (urlPage === null) {
+          setLoading(true);
+          const data = await pokemonList((cPage - 1) * 51);
+          const promises = data.results.map(async (pokemon) => {
+            return await getPokedex(pokemon.url);
+          });
+          const results = await Promise.all(promises);
+          setPokemons(results);
+          setLoading(false);
+        } else {
+          const currentPage = parseInt(urlPage);
+
+          if (currentPage >= 1 && currentPage <= 23) {
+            setcPage(currentPage);
+            setLoading(true);
+            const data = await pokemonList((currentPage - 1) * 51);
+            const promises = data.results.map(async (pokemon) => {
+              return await getPokedex(pokemon.url);
+            });
+            const results = await Promise.all(promises);
+            setPokemons(results);
+            setLoading(false);
+          } else {
+            setLoading(true);
+            const data = await pokemonList((cPage - 1) * 51);
+            const promises = data.results.map(async (pokemon) => {
+              return await getPokedex(pokemon.url);
+            });
+            const results = await Promise.all(promises);
+            setPokemons(results);
+            setLoading(false);
+          }
+        }
+      } else {
+        onSearchHandler(urlPokemon);
+      }
     } catch (err) {
       console.log("Error: " + err);
     }
   };
 
   const onSearchHandler = async (pokemon) => {
-    console.log(pokemon);
-    if (pokemon === "") {
+    const fillPokemon = pokemon.trim();
+
+    if (fillPokemon === "") {
     } else {
       try {
         setSearch(true);
         setbackPage(true);
-        const results = await searchPokemon(pokemon.toLowerCase());
+        const results = await searchPokemon(fillPokemon.toLowerCase());
+        console.log(results);
         if (results !== undefined) {
+          updateURL("?pokemon=", "pokemonSafe", fillPokemon, "pokemon");
           setPokemons([results]);
           setSearch(false);
-          console.log(results);
         } else {
           setPokemons(undefined);
           setSearch(false);
@@ -90,6 +165,11 @@ function App() {
   useEffect(() => {
     fetchPokemons();
   }, [cPage]);
+
+  useEffect(() => {
+    fetchPokemons();
+    setonDelete(false);
+  }, [onDelete]);
 
   return (
     <div>
@@ -105,6 +185,8 @@ function App() {
               cpage={cPage}
               backPage={backPage}
               returnPage={returnPage}
+              loading={loading}
+              search={search}
             />
           </div>
           <PokemonList pokemons={pokemons} loading={loading} search={search} />

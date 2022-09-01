@@ -7,7 +7,7 @@ const Pokemon = (props) => {
     <div className="pokemon-card" key={key}>
       <img className="pokemon-img" src={pokemon.sprites.front_default} />
       <div className="pokemon-info">
-          {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+        {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
         <div className="pokemon-type">
           {pokemon.types.map((type, index) => {
             return (

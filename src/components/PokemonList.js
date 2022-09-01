@@ -20,7 +20,11 @@ const PokemonList = (props) => {
 
   return (
     <div>
-      {loading || search ? <div className="alert-msg">Carregando aguarde...</div> : <Render />}
+      {loading || search ? (
+        <div className="alert-msg">Carregando aguarde...</div>
+      ) : (
+        <Render />
+      )}
     </div>
   );
 };

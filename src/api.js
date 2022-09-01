@@ -1,5 +1,3 @@
-import React from "react";
-
 export const searchPokemon = async (pokemon) => {
   try {
     let url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
@@ -22,7 +20,7 @@ export const numberPokemon = async () => {
 
 export const pokemonList = async (page) => {
   try {
-    if(page === undefined){
+    if (page === undefined) {
       page = 0;
     }
     let url = `https://pokeapi.co/api/v2/pokemon?limit=51&offset=${page}`;

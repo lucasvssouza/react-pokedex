@@ -1,5 +1,4 @@
 import React from "react";
-import Searchbar from "./Searchbar";
 
 const Navbar = () => {
   const logoImg =
