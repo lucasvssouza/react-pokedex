@@ -30,8 +30,8 @@ const Pokemon = (props) => {
               {pokemon.abilities.map((abilities, index) => {
                 return (
                   <div className="ability" key={index}>
-                      {abilities.ability.name.charAt(0).toUpperCase() +
-                        abilities.ability.name.slice(1)}
+                    {abilities.ability.name.charAt(0).toUpperCase() +
+                      abilities.ability.name.slice(1)}
                   </div>
                 );
               })}

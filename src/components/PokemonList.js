@@ -8,25 +8,38 @@ const PokemonList = (props) => {
     if (pokemons === undefined) {
       return <div className="alert-msg">Pokémon não encontrado!!!</div>;
     } else {
-      if(details === true){
-        console.log('true')
+      if (details === true) {
         return (
-          <div className="pokedex-details" >
+          <div className="pokedex-details">
             {pokemons.map((pokemon, index) => {
-              return <Pokemon pokemonDetails={pokemonDetails} details={details} key={index} pokemon={pokemon} />;
-            })}
-          </div>
-        );
-      }if(details === false){
-        return (
-          <div className="pokedex-grid">
-            {pokemons.map((pokemon, index) => {
-              return <Pokemon pokemonDetails={pokemonDetails} details={details} key={index} pokemon={pokemon} />;
+              return (
+                <Pokemon
+                  pokemonDetails={pokemonDetails}
+                  details={details}
+                  key={index}
+                  pokemon={pokemon}
+                />
+              );
             })}
           </div>
         );
       }
-      
+      if (details === false) {
+        return (
+          <div className="pokedex-grid">
+            {pokemons.map((pokemon, index) => {
+              return (
+                <Pokemon
+                  pokemonDetails={pokemonDetails}
+                  details={details}
+                  key={index}
+                  pokemon={pokemon}
+                />
+              );
+            })}
+          </div>
+        );
+      }
     }
   };
 

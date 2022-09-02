@@ -23,7 +23,7 @@ function App() {
   const urlPage = urlParams.get("page");
   const urlPokemon = urlParams.get("pokemon");
 
-  const updateURL = async (key, type, value, variable) => {
+  const updateURL = async (key, type, value) => {
     if (type === "pageSafe") {
       var newurl =
         window.location.protocol +
@@ -154,13 +154,11 @@ function App() {
         setSearch(true);
         setbackPage(true);
         const results = await searchPokemon(fillPokemon.toLowerCase());
-        console.log(results);
         if (results !== undefined) {
           updateURL("?pokemon=", "pokemonSafe", fillPokemon, "pokemon");
           setPokemons([results]);
           setSearch(false);
           setDetails(true);
-          console.log(typeof results);
         } else {
           setPokemons(undefined);
           setSearch(false);

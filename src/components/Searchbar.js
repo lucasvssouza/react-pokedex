@@ -32,17 +32,6 @@ const Searchbar = (props) => {
       <button className="sb-button" onClick={searchButton}>
         <img src={search} />
       </button>
-      {getPokemon ? (
-        <div>
-          <div>
-            Nome:{" "}
-            {getPokemon.name.charAt(0).toUpperCase() + getPokemon.name.slice(1)}
-          </div>
-          <div></div>
-          <div>{getPokemon.id}</div>
-          <img src={getPokemon.sprites.front_default} alt={getPokemon.name} />
-        </div>
-      ) : null}
     </div>
   );
 };
