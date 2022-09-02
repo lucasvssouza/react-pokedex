@@ -29,8 +29,8 @@ const Searchbar = (props) => {
         onChange={searchInput}
         onKeyDown={searchKey}
       ></input>
-      <button className="sb-button" onClick={searchButton}>
-        <img src={search} />
+      <button className="sb-button" >
+        <img src={search} onClick={searchButton}/>
       </button>
     </div>
   );
