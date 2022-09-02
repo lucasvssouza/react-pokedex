@@ -6,14 +6,14 @@ import pokeball from "../image/pokeball.png";
 const Pokemon = (props) => {
   const { key, pokemon, details, pokemonDetails } = props;
 
-  const hello = () => {
+  const detailPokemon = () => {
     pokemonDetails(pokemon.name);
   };
 
   const RenderPokemon = () => {
     if (details === true) {
       return (
-        <div className="pokemon-details" key={key} onClick={hello}>
+        <div className="pokemon-details" key={key}>
           <img className="pd-img" src={pokemon.sprites.front_default} />
           <div className="pd-info">
             <div className="pd-type">
@@ -30,8 +30,8 @@ const Pokemon = (props) => {
               {pokemon.abilities.map((abilities, index) => {
                 return (
                   <div className="ability" key={index}>
-                    {abilities.ability.name.charAt(0).toUpperCase() +
-                      abilities.ability.name.slice(1)}
+                      {abilities.ability.name.charAt(0).toUpperCase() +
+                        abilities.ability.name.slice(1)}
                   </div>
                 );
               })}
@@ -56,7 +56,7 @@ const Pokemon = (props) => {
     }
     if (details === false) {
       return (
-        <div className="pokemon-card" key={key} onClick={hello}>
+        <div className="pokemon-card" key={key} onClick={detailPokemon}>
           <img className="pc-img" src={pokemon.sprites.front_default} />
           <div className="pc-info">
             {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}

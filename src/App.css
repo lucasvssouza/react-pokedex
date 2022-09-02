@@ -1,5 +1,6 @@
 * {
   margin: 0px;
+  user-select: none;
   padding: 0px;
 }
 
@@ -8,21 +9,28 @@ html {
 }
 
 body {
-  background: rgb(1, 4, 78);
-  background: linear-gradient(90deg, rgb(2, 7, 156) 0%, rgb(0, 0, 255) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(133, 133, 133, 1) 0%,
+    rgba(69, 69, 69, 1) 100%
+  );
 }
 
 .app-container {
   display: flex;
   flex-direction: column;
-
   min-height: calc(100vh - 72px);
 }
 
 footer {
   background-color: rgb(0, 1, 37);
   border-top: 2px solid red;
-  height: 50px;
+  height: 80px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   margin-top: 20px;
 }
 
@@ -47,7 +55,6 @@ footer {
   padding: 0px 40px 0px 40px;
 }
 
-
 .navbar h1 {
   color: white;
   font-size: 50px;
@@ -56,6 +63,22 @@ footer {
 .navbar-logo {
   margin: 10px;
   width: 160px;
+}
+
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.contact-item {
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 10px;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 760px) {
@@ -77,6 +100,8 @@ footer {
 }
 
 .sb-input {
+  background-color: rgb(0, 1, 37);
+  color: white;
   border-radius: 20px;
   padding: 10px;
   height: 20px;
@@ -94,6 +119,7 @@ footer {
   height: 40px;
   color: white;
   display: flex;
+  cursor: pointer;
 }
 
 .sb-button img {
@@ -122,6 +148,7 @@ footer {
   margin-left: 10px;
   font-weight: 900;
   border: black solid 2px;
+  cursor: pointer;
 }
 
 .alert-msg {
@@ -142,7 +169,7 @@ footer {
   padding: 10px;
 }
 
-@media screen and (max-width: 1800px) {
+@media screen and (max-width: 5000px) {
   .pokedex-grid {
     display: grid;
     gap: 10px;
@@ -173,12 +200,11 @@ footer {
 }
 
 .pokemon-card {
-  background: linear-gradient(
-    157deg,
-    rgba(180, 58, 58, 1) 50%,
-    rgba(58, 80, 180, 1) 50%
-  );
-  filter: saturate(180%);
+  cursor: pointer;
+  background-image: url("./image/pc-card.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 110%;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -187,9 +213,9 @@ footer {
 }
 
 .pc-img {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.4);
   border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
   border: 3px solid rgba(0, 0, 0, 0.5);
@@ -228,22 +254,20 @@ footer {
 }
 
 .pokedex-details {
+  display: flex;
   margin-right: 50px;
   margin-left: 50px;
-  display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .pokemon-details {
-  background: linear-gradient(
-    157deg,
-    rgba(180, 58, 58, 1) 50%,
-    rgba(58, 80, 180, 1) 50%
-  );
-  filter: saturate(180%);
+  background-image: url("./image/pd-card.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 110% 110%;
   border-radius: 20px;
-  border: 5px solid black;  
+  border: 5px solid black;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -253,9 +277,9 @@ footer {
 }
 
 .pd-img {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.4);
   border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
   border: 3px solid rgba(0, 0, 0, 0.5);
@@ -285,7 +309,6 @@ footer {
   margin-top: 5px;
   margin-bottom: 5px;
   display: grid;
-  
   grid-template-columns: repeat(2, 1fr);
 }
 
@@ -302,7 +325,6 @@ footer {
   margin-bottom: 5px;
   align-items: center;
   flex-direction: row;
-  
 }
 
 .pd-id-img {
@@ -319,8 +341,11 @@ footer {
   padding-right: 10px;
 }
 
-.ability{
+.ability {
+  display: inline-flex;
   text-align: center;
+  align-items: center;
+  justify-content: center;
   border-radius: 7px;
   border: 3px solid rgba(0, 0, 0, 0.5);
   width: 90px;
@@ -328,9 +353,13 @@ footer {
   padding-right: 5px;
   margin-right: 5px;
   margin-top: 5px;
-
-  background-color: white;background: rgb(255,255,255);
-  background: linear-gradient(270deg, rgba(255,255,255,1) 0%, rgba(162,162,162,1) 100%);  color:black
+  background: linear-gradient(
+    270deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(162, 162, 162, 1) 100%
+  );
+  background-size: 110% 110%;
+  color: black;
 }
 
 .type {

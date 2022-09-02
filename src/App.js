@@ -8,6 +8,7 @@ import PokemonList from "./components/PokemonList";
 import Footer from "./components/Footer";
 
 function App() {
+
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState(false);
   const [details, setDetails] = useState(false)
@@ -131,7 +132,14 @@ function App() {
           }
         }
       } else {
-        onSearchHandler(urlPokemon);
+        if(urlPage === null){
+          onSearchHandler(urlPokemon);
+        }
+        else{
+          setcPage(urlPage)
+          onSearchHandler(urlPokemon);
+        }
+        
       }
     } catch (err) {
       console.log("Error: " + err);
